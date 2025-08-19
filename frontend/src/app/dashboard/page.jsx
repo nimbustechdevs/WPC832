@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/ui/Header";
 import SensorConfig from "@/components/dashboard/SensorConfig";
+import ConfigForm from "@/components/auth/ConfigForm";
 
 export default function DashboardPage() {
   const router = useRouter();

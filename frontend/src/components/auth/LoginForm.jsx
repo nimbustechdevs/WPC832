@@ -106,7 +106,7 @@ export default function LoginForm() {
               className="absolute right-3 top-3 text-gray-500"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+              {/* {showPassword ? <FaEyeSlash /> : <FaEye />} */}
             </button>
           </div>
         </div>

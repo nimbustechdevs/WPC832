@@ -3,16 +3,25 @@
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { FiLogOut } from "react-icons/fi";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if authToken exists in localStorage
+    const token = localStorage.getItem("authToken");
+    setIsLoggedIn(!!token);
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    setIsLoggedIn(false);
     router.push("/login");
   };
 
-  return (
+   return (
     <motion.header 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -33,15 +42,17 @@ export default function Header() {
         </h1>
       </motion.div>
 
-      <motion.button
-        onClick={handleLogout}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="flex items-center bg-white/90 text-[#5a9bd5] px-5 py-2 rounded-full font-medium hover:bg-white transition-all duration-200 shadow-md"
-      >
-        <FiLogOut className="mr-2" />
-        Logout
-      </motion.button>
+      {isLoggedIn && (
+        <motion.button
+          onClick={handleLogout}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="flex items-center bg-white/90 text-[#5a9bd5] px-5 py-2 rounded-full font-medium hover:bg-white transition-all duration-200 shadow-md"
+        >
+          <FiLogOut className="mr-2" />
+          Logout
+        </motion.button>
+      )}
     </motion.header>
   );
 }
